@@ -32,10 +32,9 @@ public class GameManager : MonoBehaviour
 
     // Use this for initialization
     void Start() {
-        text_survivingDays.text = SManager.GetInstance().survivingDays + " 일차";
+        text_survivingDays.text = SManager.GetInstance().SurvivingDays + " 일차";
 
-        slider_fire.value = SManager.GetInstance().fire / 100.0f;
-        Debug.Log(SManager.GetInstance().getWater());
+        slider_fire.value = SManager.GetInstance().getFire();
         slider_water.value = SManager.GetInstance().getWater();
         slider_food.value = SManager.GetInstance().getFood();
 
@@ -52,6 +51,9 @@ public class GameManager : MonoBehaviour
 
     // Update is called once per frame
     void Update() {
+        if (SManager.GetInstance().Heart <= 0)
+            NextDay();
+
         if (Input.GetKeyDown(KeyCode.Return))
             if (inventoryWindow.activeInHierarchy)
                 CloseInventory();
@@ -92,6 +94,9 @@ public class GameManager : MonoBehaviour
 
     public void NextDay()
     {
+        SManager.GetInstance().SurvivingDays++;
+        text_survivingDays.text = SManager.GetInstance().SurvivingDays + " 일차";
+        SManager.GetInstance().Heart = ValueTable.GlobalTable.heartMax;
         dayAlert.SetActive(true);
     }
 }

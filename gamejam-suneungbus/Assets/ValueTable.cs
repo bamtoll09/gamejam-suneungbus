@@ -86,13 +86,13 @@ public static class ValueTable
 	}
 
 	public class FireMakeScene {
-		public static float timeLimit = 10000;
-		public static int countPerFire = 3;
-		public static int clickPerTree = 1;
+		public static float timeLimit = 20000;
+		public static float countPerFire = 1.0f;
+		public static int clickPerTree = 2;
 	}
 
 	public class WaterFilteringScene {
-		public static float timeLimit = 10000;
+		public static float timeLimit = 20000;
 		public static int countPerWater = 3;
 		public static int clickPerBadwater = 1;
 		public static int clickPerCoal = 2;
@@ -100,7 +100,7 @@ public static class ValueTable
 	}
 
 	public class FoodBakingScene {
-		public static float timeLimit = 10000;
+		public static float timeLimit = 20000;
 		public static int countPerFood = 3;
 		public static int clickPerBeef = 1;
 		public static int clickPerFish = 2;
@@ -112,5 +112,6 @@ public static class ValueTable
 		public static int waterMax = 100;
 		public static int foodMax = 100;
 		public static int heartMax = 5;
+        public static bool onlyOnce = false;
 	}
 }

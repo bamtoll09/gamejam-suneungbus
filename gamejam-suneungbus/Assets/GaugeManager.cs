@@ -18,13 +18,13 @@ public class GaugeManager : MonoBehaviour {
 		setGameObjectName (objectName);
 		if (name == "FireGauge") {
 			maxData = ValueTable.GlobalTable.fireMax;
-			nowData = SManager.GetInstance ().fire;
+			nowData = SManager.GetInstance ().Fire;
 		} else if (name == "WaterGauge") {
 			maxData = ValueTable.GlobalTable.waterMax;
-			nowData = SManager.GetInstance ().water;
+			nowData = SManager.GetInstance ().Water;
 		} else if (name == "FoodGauge") {
 			maxData = ValueTable.GlobalTable.foodMax;
-			nowData = SManager.GetInstance ().food;
+			nowData = SManager.GetInstance ().Food;
 		}
 	}
 	
@@ -35,11 +35,11 @@ public class GaugeManager : MonoBehaviour {
 		}
 
 		if (name == "FireGauge") {
-			nowData = SManager.GetInstance ().fire;
+			nowData = SManager.GetInstance ().Fire;
 		} else if (name == "WaterGauge") {
-			nowData = SManager.GetInstance ().water;
+			nowData = SManager.GetInstance ().Water;
 		} else if (name == "FoodGauge") {
-			nowData = SManager.GetInstance ().food;
+			nowData = SManager.GetInstance ().Food;
 		}
 			
 		float percent = (float) nowData / maxData;

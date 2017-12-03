@@ -131,25 +131,25 @@ public class ExplorationSceneManager : MonoBehaviour {
 	public void updateUserParams(string input, int count) {
 		switch (input) {
 		case "item_tree":
-			SManager.GetInstance ().tree += count;
+			SManager.GetInstance ().Tree += count;
 			break;
 		case "item_beef":
-			SManager.GetInstance ().beef += count;
+			SManager.GetInstance ().Beef += count;
 			break;
 		case "item_badwater":
-			SManager.GetInstance ().badwater += count;
+			SManager.GetInstance ().Badwater += count;
 			break;
 		case "item_sand":
-			SManager.GetInstance ().sand += count;
+			SManager.GetInstance ().Sand += count;
 			break;
 		case "item_fish":
-			SManager.GetInstance ().fish += count;
+			SManager.GetInstance ().Fish += count;
 			break;
 		case "item_coal":
-			SManager.GetInstance ().coal += count;
+			SManager.GetInstance ().Coal += count;
 			break;
 		case "item_potato":
-			SManager.GetInstance ().potato += count;
+			SManager.GetInstance ().Potato += count;
 			break;
 		}
 	}
