@@ -112,6 +112,5 @@ public static class ValueTable
 		public static int waterMax = 100;
 		public static int foodMax = 100;
 		public static int heartMax = 5;
-        public static bool onlyOnce = false;
 	}
 }

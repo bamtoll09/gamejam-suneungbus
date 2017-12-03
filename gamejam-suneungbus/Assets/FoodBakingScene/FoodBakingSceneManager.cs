@@ -47,13 +47,13 @@ public class FoodBakingSceneManager : MonoBehaviour {
 
 		// test
 		// SManager.GetInstance ().heart = 5;
-		heartText.text = SManager.GetInstance ().Heart.ToString () + "/" + ValueTable.GlobalTable.heartMax;
+		heartText.text = SManager.GetInstance ().heart.ToString () + "/" + ValueTable.GlobalTable.heartMax;
 
 		anim.enabled = false; //누르지 않을 시 애니메이션을 멈춘다
 
-		SManager.GetInstance ().Beef = 100;
-		SManager.GetInstance ().Fish = 100;
-		SManager.GetInstance ().Potato = 100;
+		SManager.GetInstance ().beef = 100;
+		SManager.GetInstance ().fish = 100;
+		SManager.GetInstance ().potato = 100;
 	}
 
 	// Update is called once per frame
@@ -69,13 +69,13 @@ public class FoodBakingSceneManager : MonoBehaviour {
 		anim.enabled = false; //누르지 않을 시 애니메이션을 멈춘다
 
 		if (Input.GetMouseButton (0)) {
-			if (SManager.GetInstance ().Beef >= ValueTable.FoodBakingScene.clickPerBeef &&
-			     SManager.GetInstance ().Fish >= ValueTable.FoodBakingScene.clickPerFish &&
-			     SManager.GetInstance ().Potato >= ValueTable.FoodBakingScene.clickPerPotato) {
+			if (SManager.GetInstance ().beef >= ValueTable.FoodBakingScene.clickPerBeef &&
+			     SManager.GetInstance ().fish >= ValueTable.FoodBakingScene.clickPerFish &&
+			     SManager.GetInstance ().potato >= ValueTable.FoodBakingScene.clickPerPotato) {
 
-				SManager.GetInstance ().Beef -= ValueTable.FoodBakingScene.clickPerBeef;
-				SManager.GetInstance ().Fish -= ValueTable.FoodBakingScene.clickPerFish;
-				SManager.GetInstance ().Potato -= ValueTable.FoodBakingScene.clickPerPotato;
+				SManager.GetInstance ().beef -= ValueTable.FoodBakingScene.clickPerBeef;
+				SManager.GetInstance ().fish -= ValueTable.FoodBakingScene.clickPerFish;
+				SManager.GetInstance ().potato -= ValueTable.FoodBakingScene.clickPerPotato;
 
 				anim.enabled = true; //누를 시에 애니메이션을 재생시키고
 				falseCount++;
@@ -88,13 +88,13 @@ public class FoodBakingSceneManager : MonoBehaviour {
 		}
 		counterText.text = realCount.ToString ();
 
-		beefText.text = SManager.GetInstance ().Beef.ToString();
-		fishText.text = SManager.GetInstance ().Fish.ToString();
-		potatoText.text = SManager.GetInstance ().Potato.ToString();
+		beefText.text = SManager.GetInstance ().beef.ToString();
+		fishText.text = SManager.GetInstance ().fish.ToString();
+		potatoText.text = SManager.GetInstance ().potato.ToString();
 
 		if (realCount != 0 && (realCount % ValueTable.FoodBakingScene.countPerFood == 0) && lastCountedTime == timer)
 		{
-			SManager.GetInstance().Food++;
+			SManager.GetInstance().food++;
 		}
 
 		timer += Time.deltaTime;
@@ -104,14 +104,14 @@ public class FoodBakingSceneManager : MonoBehaviour {
 	}
 
 	public void startGameButton() {
-		if (SManager.GetInstance ().Heart <= 0) {
+		if (SManager.GetInstance ().heart <= 0) {
 			return;
 		}
 
-		SManager.GetInstance ().Heart--;
-		heartText.text = SManager.GetInstance ().Heart.ToString () + "/" + ValueTable.GlobalTable.heartMax;
+		SManager.GetInstance ().heart--;
+		heartText.text = SManager.GetInstance ().heart.ToString () + "/" + ValueTable.GlobalTable.heartMax;
 
-        if (SManager.GetInstance().Heart == 0)
+        if (SManager.GetInstance().heart == 0)
             SceneManager2.GetInstance().ChangeScene(5);
 
         timerText.text = (ValueTable.FireMakeScene.timeLimit / 1000).ToString ();

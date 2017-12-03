@@ -10,7 +10,10 @@ public class DayChangeManager : MonoBehaviour
     public Text contentText;
     // public GameObject object;
 
-    public static DayChangeManager GetInstance()
+    public static DayChangeManager GetInstance() { return instance; }
+
+    // Use this for initialization
+    void Awake()
     {
         if (!instance)
         {
@@ -18,14 +21,6 @@ public class DayChangeManager : MonoBehaviour
             if (!instance)
                 Debug.LogError("There needs to be one active DayChangeManager script on a DayChangeManager in your scene.");
         }
-
-        return instance;
-    }
-
-    // Use this for initialization
-    void Start()
-    {
-
     }
 
     // Update is called once per frame

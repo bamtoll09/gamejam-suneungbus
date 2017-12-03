@@ -7,251 +7,46 @@ public class SManager : MonoBehaviour
     private static SManager instance;
 
 	// Datas
-	private int heart;
+	public int heart;
 
-    private int badwater;
-    private int beef;
-    private int coal;
-    private int fish;
-    private int potato;
-    private int sand;
-    private int tree;
+    public int badwater;
+    public int beef;
+    public int coal;
+    public int fish;
+    public int potato;
+    public int sand;
+    public int tree;
 
-    private int fire;
-    private int fireMax;
-    private int water;
-    private int waterMax;
-    private int food;
-    private int foodMax;
+    public int fire;
+    public int fireMax;
+    public int water;
+    public int waterMax;
+    public int food;
+    public int foodMax;
 
-    private int survivingDays;
+    public int survivingDays;
 
-    public int Heart
-    {
-        get
-        {
-            return heart;
-        }
+    public static SManager GetInstance() { return instance; }
 
-        set
-        {
-            heart = value;
-        }
-    }
-
-    public int Badwater
-    {
-        get
-        {
-            return badwater;
-        }
-
-        set
-        {
-            badwater = value;
-        }
-    }
-
-    public int Beef
-    {
-        get
-        {
-            return beef;
-        }
-
-        set
-        {
-            beef = value;
-        }
-    }
-
-    public int Coal
-    {
-        get
-        {
-            return coal;
-        }
-
-        set
-        {
-            coal = value;
-        }
-    }
-
-    public int Fish
-    {
-        get
-        {
-            return fish;
-        }
-
-        set
-        {
-            fish = value;
-        }
-    }
-
-    public int Potato
-    {
-        get
-        {
-            return potato;
-        }
-
-        set
-        {
-            potato = value;
-        }
-    }
-
-    public int Sand
-    {
-        get
-        {
-            return sand;
-        }
-
-        set
-        {
-            sand = value;
-        }
-    }
-
-    public int Tree
-    {
-        get
-        {
-            return tree;
-        }
-
-        set
-        {
-            tree = value;
-        }
-    }
-
-    public int Fire
-    {
-        get
-        {
-            return fire;
-        }
-
-        set
-        {
-            fire = value;
-        }
-    }
-
-    public int FireMax
-    {
-        get
-        {
-            return fireMax;
-        }
-
-        set
-        {
-            fireMax = value;
-        }
-    }
-
-    public int Water
-    {
-        get
-        {
-            return water;
-        }
-
-        set
-        {
-            water = value;
-        }
-    }
-
-    public int WaterMax
-    {
-        get
-        {
-            return waterMax;
-        }
-
-        set
-        {
-            waterMax = value;
-        }
-    }
-
-    public int Food
-    {
-        get
-        {
-            return food;
-        }
-
-        set
-        {
-            food = value;
-        }
-    }
-
-    public int FoodMax
-    {
-        get
-        {
-            return foodMax;
-        }
-
-        set
-        {
-            foodMax = value;
-        }
-    }
-
-    public int SurvivingDays
-    {
-        get
-        {
-            return survivingDays;
-        }
-
-        set
-        {
-            survivingDays = value;
-        }
-    }
-
-    public static SManager GetInstance()
+    void Awake()
     {
         if (!instance)
         {
-            instance = (SManager) FindObjectOfType(typeof(SManager));
+            instance = (SManager)FindObjectOfType(typeof(SManager));
             if (!instance)
                 Debug.LogError("There needs to be one active SManager script on a SManager in your scene.");
         }
 
-        return instance;
-    }
-
-    void Awake()
-    {
         DontDestroyOnLoad(instance);
-
-        if (!ValueTable.GlobalTable.onlyOnce)
-        {
-            FireMax = ValueTable.GlobalTable.fireMax;
-            WaterMax = ValueTable.GlobalTable.waterMax;
-            FoodMax = ValueTable.GlobalTable.foodMax;
-            Heart = ValueTable.GlobalTable.heartMax;
-            Fire = FireMax / 2;
-            Water = WaterMax / 2;
-            Food = FoodMax / 2;
-            SurvivingDays = 1;
-
-            Debug.Log("RESET");
-
-            ValueTable.GlobalTable.onlyOnce = true;
-        }
+        
+        fireMax = ValueTable.GlobalTable.fireMax;
+        waterMax = ValueTable.GlobalTable.waterMax;
+        foodMax = ValueTable.GlobalTable.foodMax;
+        heart = ValueTable.GlobalTable.heartMax;
+        fire = fireMax / 2;
+        water = waterMax / 2;
+        food = foodMax / 2;
+        survivingDays = 1;
     }
 
     // Use this for initialization
@@ -264,18 +59,18 @@ public class SManager : MonoBehaviour
 	}
 
 	public float getFire() {
-		return (float)Fire / FireMax;
+		return (float)fire / fireMax;
 	}
 
 	public float getWater() {
-		return (float)Water / WaterMax;
+		return (float)water / waterMax;
 	}
 
 	public float getFood() {
-		return (float)Food / FoodMax;
+		return (float)food / foodMax;
 	}
 
 	public int[] getArrayedParams() {
-		return new int[] {Tree, Badwater, Sand, Coal, Potato, Fish, Beef};
+        return new int[] {tree, badwater, sand, coal, potato, fish, beef};
 	}
 }

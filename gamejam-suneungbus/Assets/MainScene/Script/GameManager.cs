@@ -7,17 +7,8 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     private static GameManager instance;
-    public static GameManager GetInstance()
-    {
-        if (!instance)
-        {
-            instance = (GameManager)FindObjectOfType(typeof(GameManager));
-            if (!instance)
-                Debug.LogError("There needs to be one active GameManager script on a GameManager in your scene.");
-        }
 
-        return instance;
-    }
+    public static GameManager GetInstance() { return instance; }
 
     public GameObject inventoryWindow;
     public GameObject dayAlert;
@@ -30,9 +21,19 @@ public class GameManager : MonoBehaviour
     public GameObject slider_content;
 	List<GameObject> slider_items;
 
+    void Awake()
+    {
+        if (!instance)
+        {
+            instance = (GameManager)FindObjectOfType(typeof(GameManager));
+            if (!instance)
+                Debug.LogError("There needs to be one active GameManager script on a GameManager in your scene.");
+        }
+    }
+
     // Use this for initialization
     void Start() {
-        text_survivingDays.text = SManager.GetInstance().SurvivingDays + " 일차";
+        text_survivingDays.text = SManager.GetInstance().survivingDays + " 일차";
 
         slider_fire.value = SManager.GetInstance().getFire();
         slider_water.value = SManager.GetInstance().getWater();
@@ -51,7 +52,7 @@ public class GameManager : MonoBehaviour
 
     // Update is called once per frame
     void Update() {
-        if (SManager.GetInstance().Heart <= 0)
+        if (SManager.GetInstance().heart <= 0)
             NextDay();
 
         if (Input.GetKeyDown(KeyCode.Return))
@@ -94,9 +95,18 @@ public class GameManager : MonoBehaviour
 
     public void NextDay()
     {
-        SManager.GetInstance().SurvivingDays++;
-        text_survivingDays.text = SManager.GetInstance().SurvivingDays + " 일차";
-        SManager.GetInstance().Heart = ValueTable.GlobalTable.heartMax;
+        SManager.GetInstance().survivingDays++;
+        text_survivingDays.text = SManager.GetInstance().survivingDays + " 일차";
+
+        SManager.GetInstance().heart = ValueTable.GlobalTable.heartMax;
+
+        SManager.GetInstance().fire -= 10;
+        SManager.GetInstance().water -= 10;
+        SManager.GetInstance().food -= 10;
+        slider_fire.value = SManager.GetInstance().getFire();
+        slider_water.value = SManager.GetInstance().getWater();
+        slider_food.value = SManager.GetInstance().getFood();
+
         dayAlert.SetActive(true);
     }
 }

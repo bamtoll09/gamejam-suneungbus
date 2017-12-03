@@ -7,7 +7,7 @@ public class YouDeadText : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		int day = SManager.GetInstance ().SurvivingDays;
+		int day = SManager.GetInstance ().survivingDays;
 		GetComponent<Text> ().text = day.ToString ();
 	}
 	

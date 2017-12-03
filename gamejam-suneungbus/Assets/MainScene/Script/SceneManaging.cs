@@ -5,14 +5,14 @@ using UnityEngine.SceneManagement;
 
 public class SceneManaging : MonoBehaviour
 {
-    private static GameManager instance;
-    public static GameManager GetInstance()
+    private static SceneManaging instance;
+    public static SceneManaging GetInstance()
     {
         if (!instance)
         {
-            instance = (GameManager)FindObjectOfType(typeof(GameManager));
+            instance = (SceneManaging) FindObjectOfType(typeof(SceneManaging));
             if (!instance)
-                Debug.LogError("There needs to be one active GameManager script on a GameManager in your scene.");
+                Debug.LogError("There needs to be one active SceneManaging script on a SceneManaging in your scene.");
         }
 
         return instance;

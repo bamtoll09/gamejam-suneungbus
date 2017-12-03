@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/FireScene/FireScene.unity
+- path: Assets/MainScene/MainScene.unity
   isLoaded: 1
   isActive: 1

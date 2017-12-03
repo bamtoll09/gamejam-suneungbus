@@ -42,12 +42,12 @@ public class WaterFilteringScene : MonoBehaviour {
 
         // test
         // SManager.GetInstance ().heart = 5;
-        heartText.text = SManager.GetInstance ().Heart.ToString () + "/" + ValueTable.GlobalTable.heartMax;
+        heartText.text = SManager.GetInstance ().heart.ToString () + "/" + ValueTable.GlobalTable.heartMax;
 
 		// Test Codes
-		SManager.GetInstance ().Badwater = 100;
-		SManager.GetInstance ().Coal = 100;
-		SManager.GetInstance ().Sand = 100;
+		SManager.GetInstance ().badwater = 100;
+		SManager.GetInstance ().coal = 100;
+		SManager.GetInstance ().sand = 100;
 	}
 	
 	// Update is called once per frame
@@ -60,14 +60,14 @@ public class WaterFilteringScene : MonoBehaviour {
 			return;
 		}
 
-		if (SManager.GetInstance ().Badwater >= ValueTable.WaterFilteringScene.clickPerBadwater &&
-			SManager.GetInstance ().Coal >= ValueTable.WaterFilteringScene.clickPerCoal &&
-			SManager.GetInstance ().Sand >= ValueTable.WaterFilteringScene.clickPerSand) {
+		if (SManager.GetInstance ().badwater >= ValueTable.WaterFilteringScene.clickPerBadwater &&
+			SManager.GetInstance ().coal >= ValueTable.WaterFilteringScene.clickPerCoal &&
+			SManager.GetInstance ().sand >= ValueTable.WaterFilteringScene.clickPerSand) {
 
 			if (Input.GetMouseButtonDown (0)) {
-				SManager.GetInstance ().Badwater -= ValueTable.WaterFilteringScene.clickPerBadwater;
-				SManager.GetInstance ().Coal -= ValueTable.WaterFilteringScene.clickPerCoal;
-				SManager.GetInstance ().Sand -= ValueTable.WaterFilteringScene.clickPerSand;
+				SManager.GetInstance ().badwater -= ValueTable.WaterFilteringScene.clickPerBadwater;
+				SManager.GetInstance ().coal -= ValueTable.WaterFilteringScene.clickPerCoal;
+				SManager.GetInstance ().sand -= ValueTable.WaterFilteringScene.clickPerSand;
 
 				count++;
 				lastCountedTime = timer;
@@ -75,13 +75,13 @@ public class WaterFilteringScene : MonoBehaviour {
 		}
 
 		counterText.text = count.ToString ();
-		badWaterText.text = SManager.GetInstance ().Badwater.ToString();
-		coalText.text = SManager.GetInstance ().Coal.ToString();
-		sandText.text = SManager.GetInstance ().Sand.ToString();
+		badWaterText.text = SManager.GetInstance ().badwater.ToString();
+		coalText.text = SManager.GetInstance ().coal.ToString();
+		sandText.text = SManager.GetInstance ().sand.ToString();
 
 		water.sprite = sprites[count % 3];
 		if (count != 0 && (count % ValueTable.WaterFilteringScene.countPerWater == 0) && lastCountedTime == timer) {
-			SManager.GetInstance ().Water++;
+			SManager.GetInstance ().water++;
 		}
 
 		timer += Time.deltaTime;
@@ -91,13 +91,13 @@ public class WaterFilteringScene : MonoBehaviour {
 	}
 
 	public void startGameButton() {
-        Debug.Log(SManager.GetInstance().Heart);
-		if (SManager.GetInstance ().Heart <= 0) {
+        Debug.Log(SManager.GetInstance().heart);
+		if (SManager.GetInstance ().heart <= 0) {
 			return;
 		}
 
-		SManager.GetInstance ().Heart--;
-		heartText.text = SManager.GetInstance ().Heart.ToString () + "/" + ValueTable.GlobalTable.heartMax;
+		SManager.GetInstance ().heart--;
+		heartText.text = SManager.GetInstance ().heart.ToString () + "/" + ValueTable.GlobalTable.heartMax;
 
 
 		timerText.text = (ValueTable.FireMakeScene.timeLimit / 1000).ToString ();

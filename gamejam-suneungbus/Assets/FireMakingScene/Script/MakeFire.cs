@@ -26,14 +26,16 @@ public class MakeFire : MonoBehaviour {
     public bool isDebugging;
 //    public float timeLimit;
     float movingTime;
+    float calculatingPosition;
 
-	private int count;
+    private int count;
 	private float timer;
 	private bool isStarted = false;
 
     // Use this for initialization
     void Start () {
-        anim.enabled = false;
+        anim.enabled = true;
+        anim.speed = 0;
         isMakeFire = false;
         beforePosX = 0.0f;
 
@@ -47,7 +49,7 @@ public class MakeFire : MonoBehaviour {
 
         debugger = GameObject.Find("Debugger");
 
-		SManager.GetInstance ().Tree = 1000;
+		// SManager.GetInstance ().tree = 1000;
 		timerText.text = (ValueTable.FireMakeScene.timeLimit / 1000).ToString ();
 		timer = 0;
 
@@ -58,7 +60,10 @@ public class MakeFire : MonoBehaviour {
         waterSlider.value = SManager.GetInstance().getWater();
         foodSlider.value = SManager.GetInstance().getFood();
 
-        heartText.text = SManager.GetInstance ().Heart.ToString () + "/" + ValueTable.GlobalTable.heartMax;
+        heartText.text = SManager.GetInstance ().heart.ToString () + "/" + ValueTable.GlobalTable.heartMax;
+
+        SoundManager.GetInstance().PlayFireBgm();
+        SoundManager.GetInstance().Pause();
 
         if (isDebugging)
         {
@@ -77,43 +82,59 @@ public class MakeFire : MonoBehaviour {
 		fireSlider.value = SManager.GetInstance ().getFire();
 		waterSlider.value = SManager.GetInstance ().getWater();
 		foodSlider.value = SManager.GetInstance ().getFood();
-		treeText.text = SManager.GetInstance ().Tree.ToString();
+		treeText.text = SManager.GetInstance ().tree.ToString();
 
         if (Input.GetKeyDown("1"))
         {
-            SManager.GetInstance().Heart--;
-            heartText.text = SManager.GetInstance().Heart.ToString() + "/" + ValueTable.GlobalTable.heartMax;
+            SManager.GetInstance().heart--;
+            heartText.text = SManager.GetInstance().heart.ToString() + "/" + ValueTable.GlobalTable.heartMax;
         }
 
         if (!isStarted) {
 			return;
 		} else {
-            if (SManager.GetInstance().Tree > ValueTable.FireMakeScene.clickPerTree)
+            if (SManager.GetInstance().tree >= ValueTable.FireMakeScene.clickPerTree)
             {
-                if (Input.GetMouseButton(0) && Mathf.Abs(beforePosX - Input.mousePosition.x) >= 20.0f)
+                if (Input.GetMouseButton(0))
                 {
-                    isMakeFire = true;
-                    beforePosX = Input.mousePosition.x;
-                } else { isMakeFire = false; }
+                    calculatingPosition = Mathf.Clamp01(Mathf.Abs(beforePosX - Input.mousePosition.x) / 20.0f);
+                    if (calculatingPosition > 0.0f && calculatingPosition < 0.4f)
+                        SoundManager.GetInstance().SetPitch(0.4f);
+                    else
+                        SoundManager.GetInstance().SetPitch(calculatingPosition);
+                    SoundManager.GetInstance().UnPause();
+                    anim.speed = calculatingPosition;
+
+                    if (Mathf.Abs(beforePosX - Input.mousePosition.x) >= 20.0f)
+                        isMakeFire = true;
+                    else
+                        isMakeFire = false;
+                } else {
+                    anim.speed = 0;
+                    SoundManager.GetInstance().Pause();
+                    isMakeFire = false;
+                }
+                beforePosX = Input.mousePosition.x;
 
                 if (isMakeFire)
                 {
                     movingTime += Time.deltaTime;
-                    anim.enabled = true;
 
                     if (movingTime >= ValueTable.FireMakeScene.countPerFire)
                     {
-                        SManager.GetInstance().Fire++;
-                        SManager.GetInstance().Tree -= ValueTable.FireMakeScene.clickPerTree;
+                        SManager.GetInstance().fire++;
+                        SManager.GetInstance().tree -= ValueTable.FireMakeScene.clickPerTree;
                         movingTime = 0.0f;
 
                         if (isDebugging)
                             fireText.text = "Fire: " + fireSlider.value;
                     }
-                } else { anim.enabled = false; }
+                }
+            } else {
+                endGame();
             }
 
-            Debug.Log(ValueTable.FireMakeScene.timeLimit + "," + timer);
+            // Debug.Log(ValueTable.FireMakeScene.timeLimit + "," + timer);
             if (timer >= (ValueTable.FireMakeScene.timeLimit / 1000))
             {
                 endGame();
@@ -131,14 +152,14 @@ public class MakeFire : MonoBehaviour {
     }
 
 	public void startGameButton() {
-		if (SManager.GetInstance ().Heart <= 0) {
+		if (SManager.GetInstance ().heart <= 0 || SManager.GetInstance().tree < ValueTable.FireMakeScene.clickPerTree) {
 			return;
 		}
 
-		SManager.GetInstance().Heart--;
-		heartText.text = SManager.GetInstance ().Heart.ToString () + "/" + ValueTable.GlobalTable.heartMax;
+		SManager.GetInstance().heart--;
+		heartText.text = SManager.GetInstance ().heart.ToString () + "/" + ValueTable.GlobalTable.heartMax;
 
-        if (SManager.GetInstance().Heart == 0)
+        if (SManager.GetInstance().heart == 0)
             SceneManager2.GetInstance().ChangeScene(5);
 
 
@@ -153,8 +174,10 @@ public class MakeFire : MonoBehaviour {
 	public void endGame() {
 		buttonGameObject.SetActive (true);
 		isStarted = false;
-        anim.enabled = false;
-	}
+        anim.speed = 0;
+        SoundManager.GetInstance().Pause();
+        isMakeFire = false;
+    }
 
 	public void backButtonPressed() {
         // TODO;
