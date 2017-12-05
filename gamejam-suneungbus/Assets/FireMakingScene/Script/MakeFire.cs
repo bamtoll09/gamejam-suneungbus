@@ -79,16 +79,6 @@ public class MakeFire : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		fireSlider.value = SManager.GetInstance ().getFire();
-		waterSlider.value = SManager.GetInstance ().getWater();
-		foodSlider.value = SManager.GetInstance ().getFood();
-		treeText.text = SManager.GetInstance ().tree.ToString();
-
-        if (Input.GetKeyDown("1"))
-        {
-            SManager.GetInstance().heart--;
-            heartText.text = SManager.GetInstance().heart.ToString() + "/" + ValueTable.GlobalTable.heartMax;
-        }
 
         if (!isStarted) {
 			return;
@@ -124,6 +114,10 @@ public class MakeFire : MonoBehaviour {
                     {
                         SManager.GetInstance().fire++;
                         SManager.GetInstance().tree -= ValueTable.FireMakeScene.clickPerTree;
+                        
+                        fireSlider.value = SManager.GetInstance().getFire();
+                        treeText.text = SManager.GetInstance().tree.ToString();
+
                         movingTime = 0.0f;
 
                         if (isDebugging)
@@ -134,15 +128,15 @@ public class MakeFire : MonoBehaviour {
                 endGame();
             }
 
+            timer += Time.deltaTime;
+            timerText.text = Mathf.CeilToInt((ValueTable.FireMakeScene.timeLimit / 1000) - timer).ToString();
+
             // Debug.Log(ValueTable.FireMakeScene.timeLimit + "," + timer);
             if (timer >= (ValueTable.FireMakeScene.timeLimit / 1000))
             {
                 endGame();
                 // TODO: End of Scene
             }
-
-            timer += Time.deltaTime;
-            timerText.text = Mathf.CeilToInt((ValueTable.FireMakeScene.timeLimit / 1000) - timer).ToString();
         }
     }
 

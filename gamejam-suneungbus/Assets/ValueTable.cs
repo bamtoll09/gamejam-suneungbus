@@ -93,19 +93,21 @@ public static class ValueTable
 
 	public class WaterFilteringScene {
 		public static float timeLimit = 20000;
-		public static int countPerWater = 3;
-		public static int clickPerBadwater = 1;
+		public static int countPerWater = 5;
+        public static int clickPerBadwater = 4;
 		public static int clickPerCoal = 2;
-		public static int clickPerSand = 3;
-	}
+		public static int clickPerSand = 4;
+		public static int clickPerFire = 1;
+    }
 
 	public class FoodBakingScene {
 		public static float timeLimit = 20000;
-		public static int countPerFood = 3;
-		public static int clickPerBeef = 1;
-		public static int clickPerFish = 2;
-		public static int clickPerPotato = 3;
-	}
+		public static int countPerFood = 1;
+		public static int clickPerBeef = 2;
+		public static int clickPerFish = 1;
+		public static int clickPerPotato = 1;
+		public static int clickPerWater = 1;
+    }
 
 	public class GlobalTable {
 		public static int fireMax = 100;

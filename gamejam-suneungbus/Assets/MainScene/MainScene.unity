@@ -5331,13 +5331,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   heart: 5
-  badwater: 1
-  beef: 2
-  coal: 3
-  fish: 4
-  potato: 5
-  sand: 6
-  tree: 7
+  badwater: 999
+  beef: 999
+  coal: 999
+  fish: 999
+  potato: 999
+  sand: 999
+  tree: 999
   fire: 0
   fireMax: 0
   water: 0

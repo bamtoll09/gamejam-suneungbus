@@ -28,7 +28,7 @@ public class SceneManager2 : MonoBehaviour
 		switch (num)
 		{
 		case 0: SceneManager.LoadScene("MainScene"); break;
-		case 1: SceneManager.LoadScene("FireScene"); break;
+		case 1: SceneManager.LoadScene("FireMakingScene"); break;
 		case 2: SceneManager.LoadScene("WaterFilteringScene"); break;
 		case 3: SceneManager.LoadScene("FoodBakingScene"); break;
 		case 4: SceneManager.LoadScene("ExplorationScene"); break;
