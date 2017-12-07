@@ -24,8 +24,10 @@ public class SceneManager2 : MonoBehaviour
 	}
 
 	public void ChangeScene(int num)
-	{
-		switch (num)
+    {
+        SoundManager.GetInstance().Stop();
+
+        switch (num)
 		{
 		case 0: SceneManager.LoadScene("MainScene"); break;
 		case 1: SceneManager.LoadScene("FireMakingScene"); break;

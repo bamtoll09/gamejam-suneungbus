@@ -93,4 +93,9 @@ public class SoundManager : MonoBehaviour
     {
         audioSource.pitch = val;
     }
+
+    public void Stop()
+    {
+        audioSource.Stop();
+    }
 }

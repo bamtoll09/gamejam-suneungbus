@@ -49,8 +49,10 @@ public class MakeFire : MonoBehaviour {
 
         debugger = GameObject.Find("Debugger");
 
-		// SManager.GetInstance ().tree = 1000;
-		timerText.text = (ValueTable.FireMakeScene.timeLimit / 1000).ToString ();
+        // SManager.GetInstance ().tree = 1000;
+        treeText.text = SManager.GetInstance().tree.ToString();
+
+        timerText.text = (ValueTable.FireMakeScene.timeLimit / 1000).ToString ();
 		timer = 0;
 
         // test
@@ -83,7 +85,7 @@ public class MakeFire : MonoBehaviour {
         if (!isStarted) {
 			return;
 		} else {
-            if (SManager.GetInstance().tree >= ValueTable.FireMakeScene.clickPerTree)
+            if (SManager.GetInstance().tree >= ValueTable.FireMakeScene.clickPerTree && SManager.GetInstance().fire < 100)
             {
                 if (Input.GetMouseButton(0))
                 {
@@ -146,16 +148,12 @@ public class MakeFire : MonoBehaviour {
     }
 
 	public void startGameButton() {
-		if (SManager.GetInstance ().heart <= 0 || SManager.GetInstance().tree < ValueTable.FireMakeScene.clickPerTree) {
+		if (SManager.GetInstance ().heart <= 0 || SManager.GetInstance().tree < ValueTable.FireMakeScene.clickPerTree || SManager.GetInstance().fire >= 100) {
 			return;
 		}
 
 		SManager.GetInstance().heart--;
 		heartText.text = SManager.GetInstance ().heart.ToString () + "/" + ValueTable.GlobalTable.heartMax;
-
-        if (SManager.GetInstance().heart == 0)
-            SceneManager2.GetInstance().ChangeScene(5);
-
 
         timerText.text = (ValueTable.FireMakeScene.timeLimit / 1000).ToString ();
 		timer = 0;

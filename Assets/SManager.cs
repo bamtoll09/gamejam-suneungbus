@@ -43,9 +43,9 @@ public class SManager : MonoBehaviour
         waterMax = ValueTable.GlobalTable.waterMax;
         foodMax = ValueTable.GlobalTable.foodMax;
         heart = ValueTable.GlobalTable.heartMax;
-        fire = fireMax / 2;
-        water = waterMax / 2;
-        food = foodMax / 2;
+        fire = fireMax /2;
+        water = waterMax /2;
+        food = foodMax /2;
         survivingDays = 1;
     }
 
